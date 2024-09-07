@@ -1,4 +1,4 @@
-package com.shifatech.waste_sorter;
+package com.mimatech.waste_sorter;
 
 import io.flutter.embedding.android.FlutterActivity;
 

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shifatech.waste_sorter">
+    package="com.mimatech.waste_sorter">
    <application
         android:label="waste_sorter"
         android:name="${applicationName}"
