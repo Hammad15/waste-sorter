@@ -43,6 +43,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
+
   @override
   void initState() {
     super.initState();
