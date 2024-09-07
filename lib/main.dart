@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'api_manager.dart';
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -130,6 +131,7 @@ class DisplayPictureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Future<String> classification = uploadImage(File(imagePath));
     return Scaffold(
       appBar: AppBar(title: const Text('Captured Image')),
       body: Center(
@@ -138,7 +140,18 @@ class DisplayPictureScreen extends StatelessWidget {
           children: [
             Image.file(File(imagePath)),
             const SizedBox(height: 20),
-            const Text('Classified as: Recycling'),  // Mocked classification result
+            FutureBuilder<String>(
+                future: classification,
+                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  print('snapshot: $snapshot');
+                  if (snapshot.hasData) {
+                    return Text('Classified as: ${snapshot.data}');
+                  } else if (snapshot.hasError) {
+                    return const Text('Processing Failed');
+                  } else {
+                    return const Text('Classifying...');
+                  }
+                }),  // Mocked classification result
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               child: const Text('Go Back'),
